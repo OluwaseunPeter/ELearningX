@@ -40,6 +40,7 @@ kotlin {
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.ktor.client.logging)
+
             implementation(libs.kotlinx.serialization.json)
 
             implementation(libs.koin.core)
@@ -60,6 +61,8 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)
             api(libs.koin.android)
+            implementation(libs.media3.ui)
+            implementation(libs.media3.exoplayer)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

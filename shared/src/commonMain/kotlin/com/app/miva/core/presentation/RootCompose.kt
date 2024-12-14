@@ -24,7 +24,12 @@ import com.app.miva.chapters.presentation.screen.CHAPTER_ID
 import com.app.miva.chapters.presentation.screen.ChapterCompose
 import com.app.miva.chapters.presentation.screen.LessonCompose
 import com.app.miva.chapters.presentation.viewmodel.ChaptersViewmodel
+import com.app.miva.player.presentation.screen.VIDEO_URL
+import com.app.miva.player.presentation.screen.VideoPlayerCompose
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.module.dsl.viewModel
+
 
 /**
  * enum values that represent the screens in the app
@@ -38,14 +43,14 @@ enum class AppScreens(val title: String) {
 
 
 @Composable
-fun CoreApp() {
+fun RootCompose() {
     val navController: NavHostController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
 
     val currentScreen = AppScreens.valueOf(
         backStackEntry?.destination?.route?.substringBefore("?") ?: AppScreens.Chapters.name
     )
-    val chaptersViewmodel: ChaptersViewmodel = koinInject()
+    val chaptersViewmodel: ChaptersViewmodel  = koinViewModel()
 
     Scaffold(
         topBar = {
@@ -68,7 +73,11 @@ fun CoreApp() {
             }
             composable(route = "${AppScreens.Lessons.name}?$CHAPTER_ID={$CHAPTER_ID}") {
                 val chapterId = it.arguments?.getString(CHAPTER_ID)
-                LessonCompose(chapterId.orEmpty(), chaptersViewmodel)
+                LessonCompose(chapterId.orEmpty(), navController, chaptersViewmodel)
+            }
+            composable(route = "${AppScreens.Player.name}?$VIDEO_URL={$VIDEO_URL}") {
+                val videoUrl = it.arguments?.getString(VIDEO_URL)
+                VideoPlayerCompose(videoUrl.orEmpty())
             }
         }
     }

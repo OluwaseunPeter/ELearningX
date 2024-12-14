@@ -9,7 +9,6 @@ class MivaApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
         startKoin {
             androidContext(this@MivaApplication)
             modules(appModule())

@@ -1,4 +1,4 @@
-package com.app.miva.android
+package com.app.miva.core.presentation
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
