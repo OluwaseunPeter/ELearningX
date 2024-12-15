@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.miva.chapters.domain.usecase.GetChaptersUseCase
 import com.app.miva.chapters.presentation.state.ChaptersUiState
+import com.app.miva.lessons.domain.model.Lesson
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,5 +24,9 @@ class ChaptersViewmodel(private val getChaptersUseCase: GetChaptersUseCase) : Vi
             val res = getChaptersUseCase.execute()
             _uiState.value = uiState.value.copy(loading = false, chapters = res)
         }
+    }
+
+    fun getLessonsForChapter(chapterId: String): List<Lesson> {
+        return uiState.value.chapters.firstOrNull { it.id == chapterId }?.lessons.orEmpty()
     }
 }

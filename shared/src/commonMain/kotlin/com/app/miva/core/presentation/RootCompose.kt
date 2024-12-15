@@ -22,13 +22,11 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.app.miva.chapters.presentation.screen.CHAPTER_ID
 import com.app.miva.chapters.presentation.screen.ChapterCompose
-import com.app.miva.chapters.presentation.screen.LessonCompose
+import com.app.miva.lessons.presentation.screen.LessonCompose
 import com.app.miva.chapters.presentation.viewmodel.ChaptersViewmodel
 import com.app.miva.player.presentation.screen.VIDEO_URL
 import com.app.miva.player.presentation.screen.VideoPlayerCompose
-import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.module.dsl.viewModel
 
 
 /**

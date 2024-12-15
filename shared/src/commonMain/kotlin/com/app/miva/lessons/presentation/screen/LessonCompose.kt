@@ -1,4 +1,4 @@
-package com.app.miva.chapters.presentation.screen
+package com.app.miva.lessons.presentation.screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -22,10 +22,9 @@ import org.koin.compose.koinInject
 
 @Composable
 fun LessonCompose(chapterId: String, navHostController: NavHostController, viewModel: ChaptersViewmodel = koinInject()) {
-    val chapters by viewModel.uiState.collectAsState()
     return LazyColumn {
         items(
-            chapters.chapters.firstOrNull { it.id == chapterId }?.lessons.orEmpty()
+            viewModel.getLessonsForChapter(chapterId)
         ) { item ->
             Box(modifier = Modifier
                 .padding(vertical = 12.dp, horizontal = 14.dp)

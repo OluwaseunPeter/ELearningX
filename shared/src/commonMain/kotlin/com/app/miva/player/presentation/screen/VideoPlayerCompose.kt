@@ -52,7 +52,12 @@ fun VideoPlayerCompose(videoUrl: String, viewModel: PlayerViewmodel = koinInject
             modifier = Modifier.fillMaxSize()
                 .padding(vertical = 12.dp, horizontal = 14.dp)
         ) {
-            viewModel.setVideoPlayerControl(videoPlayer(url = videoUrl, modifier = Modifier.fillMaxWidth()))
+            viewModel.setVideoPlayerControl(
+                videoPlayer(
+                    url = videoUrl,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            )
             LazyColumn {
                 items(
                     state.notes
@@ -109,7 +114,7 @@ fun VideoPlayerCompose(videoUrl: String, viewModel: PlayerViewmodel = koinInject
                 showDialog = false
                 viewModel.resetNoteState()
                 val note = state.currentNote?.copy(text = it) ?: Note(
-                    bookmark = state.videoPlayerControl?.currentPosition() ?: 0 ,
+                    bookmark = state.videoPlayerControl?.currentPosition() ?: 0,
                     lessonId = videoUrl,
                     text = it
                 )
