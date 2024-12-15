@@ -6,5 +6,4 @@ import org.koin.dsl.module
 
 actual fun getPlatformModule()  = module {
     single<SqlDriver> { DatabaseFactory().create() }
-
 }

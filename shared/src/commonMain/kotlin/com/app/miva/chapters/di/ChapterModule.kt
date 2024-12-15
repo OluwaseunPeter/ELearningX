@@ -8,11 +8,12 @@ import com.app.miva.chapters.domain.usecase.GetChaptersUseCase
 import com.app.miva.chapters.presentation.viewmodel.ChaptersViewmodel
 import com.orda.shared.data.api.getDefaultClient
 import org.koin.core.module.dsl.viewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val chapterModule = module {
     single<ChapterApiService> { ChapterApiServiceImpl.provideChapterApiService(get()) }
     single<ChapterRepository> { ChapterRepositoryImpl(get()) }
     factory { GetChaptersUseCase(get()) }
-    viewModel { ChaptersViewmodel(get()) }
+    viewModelOf(::ChaptersViewmodel)
 }

@@ -24,24 +24,23 @@ const val CHAPTER_ID = "CHAPTER_ID"
 @Composable
 fun ChapterCompose(navController: NavHostController, viewModel: ChaptersViewmodel = koinInject()) {
     val chapters by viewModel.uiState.collectAsState()
-
     return LazyColumn {
-        items(
-            chapters.chapters
-        ) { item ->
-            Box(modifier = Modifier
-                .padding(vertical = 12.dp, horizontal = 14.dp)
-                .clickable {
-                    navController.navigate("${AppScreens.Lessons}?$CHAPTER_ID=${item.id}")
-                }) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(item.title)
-                    Text("${item.lessons.size} lessons")
+            items(
+                chapters.chapters
+            ) { item ->
+                Box(modifier = Modifier
+                    .padding(vertical = 12.dp, horizontal = 14.dp)
+                    .clickable {
+                        navController.navigate("${AppScreens.Lessons}?$CHAPTER_ID=${item.id}")
+                    }) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(item.title)
+                        Text("${item.lessons.size} lessons")
+                    }
                 }
             }
-        }
     }
 }

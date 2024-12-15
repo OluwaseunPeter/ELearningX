@@ -13,8 +13,9 @@ interface ChapterApiService {
 internal class ChapterApiServiceImpl(private val httpClient: HttpClient) : ChapterApiService {
     override suspend fun getChapters(): List<ChapterApiResponse>? {
         return try {
-            httpClient.get("chapters").body()
+           httpClient.get("chapters").body()
         } catch (e: Exception) {
+            e.printStackTrace()
             emptyList()
         }
     }
