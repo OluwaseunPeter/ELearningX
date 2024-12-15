@@ -2,8 +2,6 @@ package com.app.miva.player.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.app.miva.chapters.domain.usecase.GetChaptersUseCase
-import com.app.miva.chapters.presentation.state.ChaptersUiState
 import com.app.miva.lessons.domain.model.Note
 import com.app.miva.player.domain.usecase.GetLessonNotesUseCase
 import com.app.miva.player.domain.usecase.SaveLessonNoteUseCase

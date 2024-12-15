@@ -1,4 +1,4 @@
-package com.orda.shared.data.api
+package com.app.miva.core.network
 
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
