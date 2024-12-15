@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -57,16 +58,21 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.androidx.lifecycle.viewmodel.compose)
             implementation(libs.androidx.navigation.compose)
+
+            implementation(libs.sqldelight.coroutines)
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)
             api(libs.koin.android)
             implementation(libs.media3.ui)
             implementation(libs.media3.exoplayer)
+            implementation(libs.sqldelight.android)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+            implementation(libs.sqldelight.native)
         }
+
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
@@ -82,5 +88,21 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+repositories {
+    mavenCentral()
+    google()
+    maven("https://repository.axelor.com/nexus/repository/maven-public") //For Video Cache
+}
+
+kotlin {
+    sqldelight {
+        databases {
+            create("MivaDb") {
+                packageName = "com.app.miva.db"
+            }
+        }
     }
 }

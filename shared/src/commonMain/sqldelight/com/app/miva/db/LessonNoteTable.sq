@@ -1,0 +1,19 @@
+CREATE TABLE IF NOT EXISTS `lessonNoteDb` (
+`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+`lessonId` TEXT NOT NULL,
+`title` TEXT,
+`body` TEXT,
+`bookmark` INTEGER NOT NULL
+);
+
+getAllNoteByLessonId:
+SELECT * FROM lessonNoteDb WHERE lessonId = :lessonId;
+
+saveNote:
+INSERT OR REPLACE INTO lessonNoteDb(id, lessonId, title, body, bookmark) VALUES ?;
+
+addNewNote:
+INSERT OR REPLACE INTO lessonNoteDb(lessonId, title, body, bookmark) VALUES ?;
+
+discardProducts:
+DELETE FROM lessonNoteDb;

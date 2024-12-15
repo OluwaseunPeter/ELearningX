@@ -8,6 +8,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 
 @Composable
 actual fun VideoPlayer(modifier: Modifier , url: String) {
+
     AndroidView(
         modifier = modifier,
         factory = { context ->

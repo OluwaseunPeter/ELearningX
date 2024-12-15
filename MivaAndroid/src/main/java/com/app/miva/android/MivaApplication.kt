@@ -1,9 +1,11 @@
 package com.app.miva.android
 
 import android.app.Application
+import android.content.Context
 import com.app.miva.core.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+
 
 class MivaApplication : Application() {
 
@@ -14,4 +16,5 @@ class MivaApplication : Application() {
             modules(appModule())
         }
     }
+
 }

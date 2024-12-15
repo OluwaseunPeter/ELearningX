@@ -13,6 +13,8 @@ compose-multiplatform = "1.7.0"
 androidx-lifecycle = "2.8.3"
 androidx-navigation = "2.7.0-alpha06"
 media3 = "1.4.0"
+sqldelight = "2.0.2"
+
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -48,7 +50,12 @@ koin-compose-viewmodel-navigation = {module = "io.insert-koin:koin-compose-viewm
 
 media3-exoplayer = {module = "androidx.media3:media3-exoplayer" ,version.ref = "media3"}
 media3-ui = {module = "androidx.media3:media3-ui" ,version.ref = "media3"}
+videocache = {module ="com.danikula:videocache" , version = "2.7.1"}
 
+sqldelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
+sqldelight-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
+sqldelight-jvm = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
+sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -60,3 +67,4 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 serialization = {id= "org.jetbrains.kotlin.plugin.serialization" , version.ref = "serialization_plugin_version"}
 ksp = { id ="com.google.devtools.ksp" , version = "2.1.0-1.0.29"}
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
