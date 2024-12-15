@@ -45,14 +45,14 @@ const val VIDEO_URL = "VIDEO_URL"
 fun VideoPlayerCompose(videoUrl: String, viewModel: PlayerViewmodel = koinInject()) {
     viewModel.fetchVideoNotes(videoUrl)
     val state by viewModel.uiState.collectAsState()
-
     var showDialog by remember { mutableStateOf(false) }
+
     Box {
         Column(
             modifier = Modifier.fillMaxSize()
                 .padding(vertical = 12.dp, horizontal = 14.dp)
         ) {
-            VideoPlayer(url = videoUrl, modifier = Modifier.fillMaxWidth())
+            viewModel.setVideoPlayerControl(videoPlayer(url = videoUrl, modifier = Modifier.fillMaxWidth()))
             LazyColumn {
                 items(
                     state.notes
@@ -60,7 +60,7 @@ fun VideoPlayerCompose(videoUrl: String, viewModel: PlayerViewmodel = koinInject
                     Box(modifier = Modifier
                         .padding(vertical = 12.dp, horizontal = 14.dp)
                         .clickable {
-
+                            state.videoPlayerControl?.seek(item.bookmark)
                         }) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -98,20 +98,24 @@ fun VideoPlayerCompose(videoUrl: String, viewModel: PlayerViewmodel = koinInject
     }
 
     if (showDialog) {
+        state.videoPlayerControl?.pause()
         showDialog(
             initialText = state.currentNote?.text.orEmpty(),
             onDismiss = {
                 showDialog = false
-                viewModel.setCurrentNote(null)
+                viewModel.resetNoteState()
             },
             onSave = {
                 showDialog = false
+                viewModel.resetNoteState()
                 val note = state.currentNote?.copy(text = it) ?: Note(
+                    bookmark = state.videoPlayerControl?.currentPosition() ?: 0 ,
                     lessonId = videoUrl,
                     text = it
                 )
-                viewModel.setCurrentNote(null)
-                viewModel.saveVideoNote(note)
+                if (note.text.isBlank().not()) {
+                    viewModel.saveVideoNote(note)
+                }
             }
         )
     }

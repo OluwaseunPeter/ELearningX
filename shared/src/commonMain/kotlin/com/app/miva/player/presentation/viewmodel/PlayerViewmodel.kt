@@ -7,6 +7,7 @@ import com.app.miva.chapters.presentation.state.ChaptersUiState
 import com.app.miva.lessons.domain.model.Note
 import com.app.miva.player.domain.usecase.GetLessonNotesUseCase
 import com.app.miva.player.domain.usecase.SaveLessonNoteUseCase
+import com.app.miva.player.presentation.screen.VideoPlayerControl
 import com.app.miva.player.presentation.state.NoteUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -36,9 +37,22 @@ class PlayerViewmodel(
         }
     }
 
-    fun setCurrentNote(note: Note?) {
+    fun setCurrentNote(note: Note) {
         viewModelScope.launch {
             _uiState.value = uiState.value.copy(currentNote = note)
+        }
+    }
+
+    fun resetNoteState() {
+        viewModelScope.launch {
+            uiState.value.videoPlayerControl?.play()
+            _uiState.value = uiState.value.copy(currentNote = null)
+        }
+    }
+
+    fun setVideoPlayerControl(control: VideoPlayerControl) {
+        viewModelScope.launch {
+            _uiState.value = uiState.value.copy(videoPlayerControl = control)
         }
     }
 }
