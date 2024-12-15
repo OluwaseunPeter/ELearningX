@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 
 @Composable
-actual fun videoPlayer(modifier: Modifier , url: String) : VideoPlayerControl {
+actual fun videoPlayer(modifier: Modifier, url: String): VideoPlayerControl {
     val videoControl by remember { mutableStateOf(AndroidVidePlayerControl()) }
     AndroidView(
         modifier = modifier,
@@ -31,7 +31,7 @@ actual fun videoPlayer(modifier: Modifier , url: String) : VideoPlayerControl {
 
 
 class AndroidVidePlayerControl : VideoPlayerControl {
-    private  var videoView: VideoView? = null
+    private var videoView: VideoView? = null
     override fun play() {
         videoView?.start()
     }
